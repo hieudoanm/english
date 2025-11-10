@@ -1,8 +1,9 @@
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import '@words/styles/globals.css';
 import type { AppProps } from 'next/app';
-import { FC } from 'react';
 import { Geist, Geist_Mono } from 'next/font/google';
 import Head from 'next/head';
+import { FC } from 'react';
 
 const geistSans = Geist({
 	variable: '--font-geist-sans',
@@ -14,6 +15,8 @@ const geistMono = Geist_Mono({
 	subsets: ['latin'],
 });
 
+const queryClient = new QueryClient();
+
 const App: FC<AppProps> = ({ Component, pageProps }) => {
 	return (
 		<>
@@ -21,7 +24,9 @@ const App: FC<AppProps> = ({ Component, pageProps }) => {
 				<title>Words</title>
 			</Head>
 			<div className={`${geistSans.className} ${geistMono.className}`}>
-				<Component {...pageProps} />
+				<QueryClientProvider client={queryClient}>
+					<Component {...pageProps} />
+				</QueryClientProvider>
 			</div>
 		</>
 	);
