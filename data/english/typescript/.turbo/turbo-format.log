@@ -1,0 +1,10 @@
+
+
+> @nothing/english-words@0.0.1 format /Users/hieudoan/git/github.com/hieudoanm/playground/sandbox/packages/python.org/languages/english/typescript
+> prettier --cache --write ./src
+
+src/analyse/count.ts[2K[1G[90msrc/analyse/count.ts[39m 2ms (unchanged) (cached)
+src/analyse/frequency.ts[2K[1G[90msrc/analyse/frequency.ts[39m 0ms (unchanged) (cached)
+src/analyse/results.ts[2K[1G[90msrc/analyse/results.ts[39m 1ms (unchanged) (cached)
+src/database/export.ts[2K[1G[90msrc/database/export.ts[39m 0ms (unchanged) (cached)
+src/database/import.ts[2K[1G[90msrc/database/import.ts[39m 0ms (unchanged) (cached)

@@ -1,0 +1,5 @@
+
+
+> @nothing/english-words@0.0.1 lint /Users/hieudoan/git/github.com/hieudoanm/hieudoanm.github.io/data/languages/english/typescript
+> eslint --fix .
+
