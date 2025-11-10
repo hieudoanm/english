@@ -16,7 +16,7 @@ const HomePage: NextPage = () => {
 			typeOf: string[];
 		}[];
 	}>({
-		queryKey: ['repoData'],
+		queryKey: [`word`, word],
 		queryFn: async () => {
 			const url: string = `https://raw.githubusercontent.com/hieudoanm/words/refs/heads/master/packages/data/english/words/${encodeURI(word)}.json`;
 			const response = await fetch(url);
