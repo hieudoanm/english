@@ -18,7 +18,7 @@ const HomePage: NextPage = () => {
 	}>({
 		queryKey: ['repoData'],
 		queryFn: async () => {
-			const url: string = `https://raw.githubusercontent.com/hieudoanm/words/refs/heads/master/data/english/words/${encodeURI(word)}.json`;
+			const url: string = `https://raw.githubusercontent.com/hieudoanm/words/refs/heads/master/packages/data/english/words/${encodeURI(word)}.json`;
 			const response = await fetch(url);
 			return await response.json();
 		},
