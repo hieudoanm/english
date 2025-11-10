@@ -64,7 +64,13 @@ const HomePage: NextPage = () => {
 													{synonyms.map((synonym) => (
 														<span
 															key={synonym}
-															className="mr-2 inline-block underline decoration-dotted">
+															className="mr-2 inline-block cursor-pointer underline decoration-dotted"
+															onClick={() =>
+																setState((previous) => ({
+																	...previous,
+																	word: synonym,
+																}))
+															}>
 															{synonym}
 														</span>
 													))}
@@ -76,7 +82,13 @@ const HomePage: NextPage = () => {
 													{anonyms.map((anonym) => (
 														<span
 															key={anonym}
-															className="mr-2 inline-block underline decoration-dotted">
+															className="mr-2 inline-block cursor-pointer underline decoration-dotted"
+															onClick={() =>
+																setState((previous) => ({
+																	...previous,
+																	word: anonym,
+																}))
+															}>
 															{anonym}
 														</span>
 													))}
