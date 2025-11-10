@@ -18,7 +18,7 @@
 		}
 	},
 	"include": [
-		"next-env.d.ts",
+		"packages/frontend/next-env.d.ts",
 		"**/*.ts",
 		"**/*.tsx",
 		".next/types/**/*.ts",
