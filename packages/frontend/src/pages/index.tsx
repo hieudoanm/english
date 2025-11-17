@@ -27,7 +27,8 @@ const HomePage: NextPage = () => {
 		queryKey: [word],
 		queryFn: async () => {
 			if (word === '') throw new Error('Empty Word');
-			const url: string = `https://raw.githubusercontent.com/hieudoanm/words/refs/heads/master/packages/data/english/words/${encodeURI(word)}.json`;
+			const wordQuery = encodeURI(word.trim().toLowerCase());
+			const url: string = `https://raw.githubusercontent.com/hieudoanm/words/refs/heads/master/packages/data/english/words/${wordQuery}.json`;
 			const { data: response, error: fetchError } = await tryCatch(fetch(url));
 			if (fetchError) {
 				console.error(fetchError);
