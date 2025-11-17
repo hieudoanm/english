@@ -1,26 +1,44 @@
 import { useQuery } from '@tanstack/react-query';
+import { tryCatch } from '@words/utils/try-catch';
 import { NextPage } from 'next';
 import { ChangeEvent, useState } from 'react';
+
+export type Word = {
+	word: string;
+	results: {
+		definition: string;
+		partOfSpeech: string;
+		synonyms: string[];
+		anonyms: string[];
+		usageOf: string[];
+		typeOf: string[];
+	}[];
+};
 
 const HomePage: NextPage = () => {
 	const [{ word }, setState] = useState<{ word: string }>({ word: 'example' });
 
-	const { isFetching, isPending, data, error } = useQuery<{
-		word: string;
-		results: {
-			definition: string;
-			partOfSpeech: string;
-			synonyms: string[];
-			anonyms: string[];
-			usageOf: string[];
-			typeOf: string[];
-		}[];
-	}>({
-		queryKey: [`word`, word],
+	const {
+		isFetching = false,
+		isPending = false,
+		data = { word: '', results: [] },
+		error = null,
+	} = useQuery<Word>({
+		queryKey: [word],
 		queryFn: async () => {
+			if (word === '') throw new Error('Empty Word');
 			const url: string = `https://raw.githubusercontent.com/hieudoanm/words/refs/heads/master/packages/data/english/words/${encodeURI(word)}.json`;
-			const response = await fetch(url);
-			return await response.json();
+			const { data: response, error: fetchError } = await tryCatch(fetch(url));
+			if (fetchError) {
+				console.error(fetchError);
+				throw new Error('Fetch Error');
+			}
+			const { data, error } = await tryCatch<Word>(response.json());
+			if (error) {
+				console.error(error);
+				throw new Error('JSON Error');
+			}
+			return data;
 		},
 	});
 
