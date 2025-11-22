@@ -1,4 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
+import { logger } from '@words/utils/log';
 import { tryCatch } from '@words/utils/try-catch';
 import { NextPage } from 'next';
 import { ChangeEvent, useState } from 'react';
@@ -27,16 +28,16 @@ const HomePage: NextPage = () => {
 		queryKey: [word],
 		queryFn: async () => {
 			if (word === '') throw new Error('Empty Word');
-			const wordQuery = encodeURI(word.trim().toLowerCase());
+			const wordQuery: string = encodeURI(word.trim().toLowerCase());
 			const url: string = `https://raw.githubusercontent.com/hieudoanm/words/refs/heads/master/packages/data/english/words/${wordQuery}.json`;
 			const { data: response, error: fetchError } = await tryCatch(fetch(url));
 			if (fetchError) {
-				console.error(fetchError);
+				logger.error(fetchError);
 				throw new Error('Fetch Error');
 			}
 			const { data, error } = await tryCatch<Word>(response.json());
 			if (error) {
-				console.error(error);
+				logger.error(error);
 				throw new Error('JSON Error');
 			}
 			return data;
