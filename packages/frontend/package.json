@@ -3,12 +3,13 @@
 	"version": "0.0.1",
 	"private": true,
 	"scripts": {
-		"predev": "rimraf .next && kill-port 3000",
+		"predev": "rimraf .next && kill-port 3000 && prisma generate",
 		"dev": "next dev",
-		"prebuild": "rimraf .next",
+		"prebuild": "rimraf .next && prisma generate",
 		"build": "next build --turbopack",
 		"prestart": "kill-port 3000",
 		"start": "next start",
+		"prelint": "prisma generate",
 		"lint": "eslint",
 		"format": "prettier --cache --write ."
 	},
@@ -19,6 +20,8 @@
 		"react-dom": "19.2.0"
 	},
 	"devDependencies": {
+		"@dotenvx/dotenvx": "1.51.1",
+		"@json2csv/plainjs": "7.0.6",
 		"@tailwindcss/postcss": "4",
 		"@types/node": "24",
 		"@types/react": "19",
@@ -31,6 +34,7 @@
 		"kill-port": "2.0.1",
 		"prettier": "3.6.2",
 		"prettier-plugin-tailwindcss": "0.7.1",
+		"prisma": "7.0.0",
 		"rimraf": "6.1.2",
 		"tailwindcss": "4",
 		"ts-node": "10.9.2",
