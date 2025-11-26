@@ -5,8 +5,9 @@
 	"scripts": {
 		"predev": "rimraf .next && kill-port 3000 && prisma generate",
 		"dev": "next dev",
-		"prebuild": "rimraf .next && prisma generate",
+		"prebuild": "rimraf .next ../../docs && prisma generate",
 		"build": "next build --turbopack",
+		"postbuild": "touch ../../docs/.nojekyll",
 		"prestart": "kill-port 3000",
 		"start": "next start",
 		"prelint": "prisma generate",

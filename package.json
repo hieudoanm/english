@@ -6,7 +6,6 @@
     "format": "turbo run format",
     "prebuild": "rimraf docs",
     "build": "turbo run build",
-    "postbuild": "touch docs/.nojekyll",
     "lint": "turbo run lint",
     "test": "turbo run test",
     "dev": "turbo run dev",
