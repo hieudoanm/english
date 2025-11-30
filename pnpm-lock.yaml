@@ -18,9 +18,7 @@ importers:
         specifier: 2.6.1
         version: 2.6.1
 
-  packages/data/english/words: {}
-
-  packages/frontend:
+  packages/app:
     dependencies:
       '@capacitor/android':
         specifier: 7.4.4
@@ -107,6 +105,8 @@ importers:
       typescript:
         specifier: ^5.9.3
         version: 5.9.3
+
+  packages/data/english/words: {}
 
 packages:
 
