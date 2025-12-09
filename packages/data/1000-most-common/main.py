@@ -4,6 +4,7 @@ import pandas as pd
 import requests
 import shutil
 from tqdm import tqdm
+import json
 
 
 TIMEOUT = 30
@@ -62,6 +63,8 @@ chunks_list_items = chunks(list_items, 30)
 for chunk_list_items in chunks_list_items:
     for list_item in tqdm(chunk_list_items):
         anchor = list_item.find("a", href=True)
+        if anchor is None:
+            continue
         language = anchor.text.lower()
         file_name = "-".join(language.split(" "))
         column = "_".join(language.split(" "))
@@ -102,7 +105,12 @@ for csv_file in csv_files:
 
 languages_data_frame = pd.concat(data_frames, ignore_index=True)
 languages_data_frame = languages_data_frame.sort_values(by=["language", "english"])
-languages_data_frame.to_csv("./languages.csv", index=False)
+languages_data_frame.to_csv("./data/languages.csv", index=False)
+
+
+languages_json = languages_data_frame.to_dict(orient="records")
+with open("./data/languages.json", "w") as json_file:
+    json.dump(languages_json, json_file, ensure_ascii=False, indent=4)
 
 
 shutil.rmtree("./temp")
