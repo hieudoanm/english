@@ -20,7 +20,7 @@ quotes_df = pandas.DataFrame(quotes)
 quotes_df = quotes_df[["author", "content"]]
 quotes_df = quotes_df.sort_values(by=["author", "content"])
 quotes_df = quotes_df.drop_duplicates(subset=["author", "content"])
-quotes_df.to_csv("./eng/quotes.csv", index=False)
+quotes_df.to_csv("./data/quotes.csv", index=False)
 
 
 print("Total quotes:", len(quotes_df))

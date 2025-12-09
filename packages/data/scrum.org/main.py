@@ -47,7 +47,9 @@ def init_ui():
 
     # Initialise session state
     if "chat_history" not in st.session_state:
-        st.session_state.chat_history = [AIMessage(content="Hello, I'm here to help. Ask me anything!")]
+        st.session_state.chat_history = [
+            AIMessage(content="Hello, I'm here to help. Ask me anything!")
+        ]
 
     if "vector_store" not in st.session_state:
         st.session_state.vector_store = None
@@ -189,7 +191,9 @@ def get_response(user_query: str) -> str:
     context_chain = get_related_context(st.session_state.vector_store)
     rag_chain = get_context_aware_prompt(context_chain)
 
-    res = rag_chain.invoke({"chat_history": st.session_state.chat_history, "input": user_query})
+    res = rag_chain.invoke(
+        {"chat_history": st.session_state.chat_history, "input": user_query}
+    )
     return res["answer"]
 
 
