@@ -1,130 +1,96 @@
-import { useQuery } from '@tanstack/react-query';
-import { logger } from '@words/utils/log';
-import { tryCatch } from '@words/utils/try-catch';
+import { Navbar } from '@words/components/Navbar';
 import { NextPage } from 'next';
-import { ChangeEvent, useState } from 'react';
+import Link from 'next/link';
 
-export type Word = {
-	word: string;
-	results: {
-		definition: string;
-		partOfSpeech: string;
-		synonyms: string[];
-		anonyms: string[];
-		usageOf: string[];
-		typeOf: string[];
-	}[];
-};
-
-const HomePage: NextPage = () => {
-	const [{ word }, setState] = useState<{ word: string }>({ word: 'example' });
-
-	const {
-		isFetching = false,
-		isPending = false,
-		data = { word: '', results: [] },
-		error = null,
-	} = useQuery<Word>({
-		queryKey: [word],
-		queryFn: async () => {
-			if (word === '') throw new Error('Empty Word');
-			const wordQuery: string = encodeURI(word.trim().toLowerCase());
-			const url: string = `https://raw.githubusercontent.com/hieudoanm/words/refs/heads/master/packages/data/english/words/${wordQuery}.json`;
-			const { data: response, error: fetchError } = await tryCatch(fetch(url));
-			if (fetchError) {
-				logger.error(fetchError);
-				throw new Error('Fetch Error');
-			}
-			const { data, error } = await tryCatch<Word>(response.json());
-			if (error) {
-				logger.error(error);
-				throw new Error('JSON Error');
-			}
-			return data;
-		},
-	});
-
+const LandingPage: NextPage = () => {
 	return (
-		<div className="container mx-auto p-8">
-			<div className="flex w-full flex-col gap-y-8">
-				<input
-					id="word"
-					name="word"
-					placeholder="Word"
-					className="input w-full"
-					value={word}
-					onChange={(event: ChangeEvent<HTMLInputElement>) => {
-						setState((previous) => ({ ...previous, word: event.target.value }));
-					}}
-				/>
-				{(isPending || isFetching) && (
-					<div className="text-center">Loading...</div>
-				)}
-				{error && <div className="text-center">{error.message}</div>}
-				{!data && !isFetching && !error && (
-					<div className="text-center">No data found</div>
-				)}
-				{data && !isFetching && !error && (
-					<div className="flex flex-col gap-y-4">
-						<h1 className="text-4xl">{data.word}</h1>
+		<div className="bg-base-200 flex min-h-screen flex-col">
+			{/* Navbar */}
+			<Navbar />
 
-						{data.results.map(
-							(
-								{ partOfSpeech, definition, synonyms = [], anonyms = [] },
-								index,
-							) => {
-								return (
-									<>
-										<div key={`${partOfSpeech}-${index}`}>
-											<h2 className="font-semibold">{partOfSpeech}</h2>
-											<p>Definition: {definition}</p>
-											{synonyms.length > 0 && (
-												<p>
-													<small>Synonyms</small>:{' '}
-													{synonyms.map((synonym) => (
-														<span
-															key={synonym}
-															className="mr-2 inline-block cursor-pointer underline decoration-dotted"
-															onClick={() =>
-																setState((previous) => ({
-																	...previous,
-																	word: synonym,
-																}))
-															}>
-															{synonym}
-														</span>
-													))}
-												</p>
-											)}
-											{anonyms.length > 0 && (
-												<p>
-													<small>Anonyms</small>:{' '}
-													{anonyms.map((anonym) => (
-														<span
-															key={anonym}
-															className="mr-2 inline-block cursor-pointer underline decoration-dotted"
-															onClick={() =>
-																setState((previous) => ({
-																	...previous,
-																	word: anonym,
-																}))
-															}>
-															{anonym}
-														</span>
-													))}
-												</p>
-											)}
-										</div>
-										<hr />
-									</>
-								);
-							},
-						)}
+			{/* Hero Section */}
+			<div className="hero bg-base-200 min-h-[60vh]">
+				<div className="hero-content text-center">
+					<div className="max-w-lg">
+						<h1 className="mb-4 text-5xl font-bold">Learn & Explore Words</h1>
+						<p className="mb-6 text-lg text-gray-600">
+							Enhance your vocabulary with our dictionary, flash cards, and
+							multi-language support.
+						</p>
+						<Link href="/languages" className="btn btn-primary btn-lg">
+							Get Started
+						</Link>
 					</div>
-				)}
+				</div>
 			</div>
+
+			<div className="divider my-8" />
+
+			{/* Features Section */}
+			<div id="apps" className="bg-base-200 py-16">
+				<div className="container mx-auto px-8 text-center md:px-0">
+					<h2 className="mb-12 text-4xl font-bold">Our Apps</h2>
+					<div className="grid grid-cols-1 gap-8 md:grid-cols-3">
+						{/* Multi-language Support */}
+						<div className="card bg-base-100 p-6 shadow-lg transition hover:shadow-xl">
+							<div className="card-body">
+								<h3 className="card-title mb-2 text-2xl">Multi-language</h3>
+								<p className="text-gray-600">
+									Expand your learning experience with support for multiple
+									languages beyond English and Korean.
+								</p>
+							</div>
+						</div>
+
+						{/* Flash Cards */}
+						<div className="card bg-base-100 p-6 shadow-lg transition hover:shadow-xl">
+							<div className="card-body">
+								<h3 className="card-title mb-2 text-2xl">Flash Cards</h3>
+								<p className="text-gray-600">
+									Learn vocabulary efficiently using interactive flash cards
+									with Korean-English translations.
+								</p>
+							</div>
+						</div>
+
+						{/* English Dictionary */}
+						<div className="card bg-base-100 p-6 shadow-lg transition hover:shadow-xl">
+							<div className="card-body">
+								<h3 className="card-title mb-2 text-2xl">English Dictionary</h3>
+								<p className="text-gray-600">
+									Quickly search words with clear definitions, synonyms, and
+									antonyms to improve your English skills.
+								</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div className="divider my-8" />
+
+			{/* Call to Action */}
+			<div className="bg-base-200 py-16 text-center">
+				<h2 className="mb-4 text-4xl font-bold">Start Learning Today</h2>
+				<p className="mb-6 text-lg text-gray-700">
+					Explore our apps and improve your vocabulary in a fun and interactive
+					way.
+				</p>
+				<Link href="/languages" className="btn btn-primary btn-lg">
+					Explore Apps
+				</Link>
+			</div>
+
+			<div className="divider my-8" />
+
+			{/* Footer */}
+			<footer className="footer footer-center bg-base-200 text-base-content pb-8">
+				<div>
+					<p>© 2025 Words. All rights reserved.</p>
+				</div>
+			</footer>
 		</div>
 	);
 };
 
-export default HomePage;
+export default LandingPage;
