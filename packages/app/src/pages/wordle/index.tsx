@@ -4,9 +4,9 @@ import { useState } from 'react';
 
 const WORDS: string[] = ['apple', 'grape', 'melon', 'peach', 'berry']; // example words
 const MAX_ATTEMPTS: number = 5;
-
 const RANDOM_TARGET_WORD: string =
 	WORDS[Math.floor(Math.random() * WORDS.length)];
+const ALPHABET = 'qwertyuiopasdfghjklzxvbcnm'.split('');
 
 type LetterState = 'correct' | 'present' | 'absent';
 type Guess = { word: string; result: LetterState[] };
@@ -17,30 +17,40 @@ const WordlePage: NextPage = () => {
 	const [currentGuess, setCurrentGuess] = useState('');
 	const [message, setMessage] = useState('');
 
-	const checkGuess = (guess: string) => {
-		return guess.split('').map((char, i) => {
+	const checkGuess = (guess: string) =>
+		guess.split('').map((char, i) => {
 			if (char === targetWord[i]) return 'correct';
 			if (targetWord.includes(char)) return 'present';
 			return 'absent';
 		});
+
+	const submitGuess = (guess: string) => {
+		if (guess.length !== targetWord.length) {
+			setMessage('Word length mismatch!');
+			return;
+		}
+
+		const result = checkGuess(guess);
+		setGuesses([...guesses, { word: guess, result }]);
+		setCurrentGuess('');
+		setMessage('');
+
+		if (guess === targetWord) setMessage('🎉 You won!');
+		else if (guesses.length + 1 >= MAX_ATTEMPTS)
+			setMessage(`Game over! Word: ${targetWord}`);
 	};
 
-	const handleKey = (e: React.KeyboardEvent<HTMLInputElement>) => {
-		if (e.key === 'Enter') {
-			if (currentGuess.length !== targetWord.length) {
-				setMessage('Word length mismatch!');
-				return;
-			}
+	const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+		if (e.key === 'Enter') submitGuess(currentGuess);
+	};
 
-			const result = checkGuess(currentGuess);
-			setGuesses([...guesses, { word: currentGuess, result }]);
-			setCurrentGuess('');
-			setMessage('');
+	const handleKeyboardClick = (letter: string) => {
+		if (currentGuess.length < targetWord.length)
+			setCurrentGuess((prev) => prev + letter);
+	};
 
-			if (currentGuess === targetWord) setMessage('🎉 You won!');
-			else if (guesses.length + 1 >= MAX_ATTEMPTS)
-				setMessage(`Game over! Word: ${targetWord}`);
-		}
+	const handleBackspace = () => {
+		setCurrentGuess((prev) => prev.slice(0, -1));
 	};
 
 	const startNewGame = () => {
@@ -50,7 +60,24 @@ const WordlePage: NextPage = () => {
 		setTargetWord(WORDS[Math.floor(Math.random() * WORDS.length)]);
 	};
 
-	// Render all attempts including empty ones
+	// Build a mapping of letter → status for the keyboard
+	const getKeyboardStatus = () => {
+		const statusMap: Record<string, LetterState> = {};
+		guesses.forEach(({ word, result }) => {
+			word.split('').forEach((char, idx) => {
+				const prev = statusMap[char];
+				const newState = result[idx];
+				// correct overrides anything, present overrides absent
+				if (prev === 'correct') return;
+				if (prev === 'present' && newState === 'absent') return;
+				statusMap[char] = newState;
+			});
+		});
+		return statusMap;
+	};
+
+	const keyboardStatus = getKeyboardStatus();
+
 	const renderGrid = () => {
 		const rows = [];
 		for (let i = 0; i < MAX_ATTEMPTS; i++) {
@@ -67,7 +94,6 @@ const WordlePage: NextPage = () => {
 							if (result[j] === 'present') bg = 'bg-warning text-white';
 							if (result[j] === 'absent') bg = 'bg-neutral text-white';
 						} else if (i === guesses.length) {
-							// current typing row
 							text = currentGuess[j] || '';
 						}
 
@@ -88,7 +114,7 @@ const WordlePage: NextPage = () => {
 	return (
 		<div className="bg-base-200 flex min-h-screen flex-col">
 			<Navbar />
-			<div className="flex grow flex-col items-center justify-center px-4">
+			<div className="flex grow flex-col items-center justify-center p-8">
 				<h1 className="mb-6 text-4xl font-bold">Wordle Clone</h1>
 
 				{/* Full Grid */}
@@ -101,9 +127,35 @@ const WordlePage: NextPage = () => {
 					maxLength={targetWord.length}
 					value={currentGuess}
 					onChange={(e) => setCurrentGuess(e.target.value.toLowerCase())}
-					onKeyDown={handleKey}
+					onKeyDown={handleKeyDown}
 					autoFocus
 				/>
+
+				{/* On-screen keyboard */}
+				<div className="mb-4 grid grid-cols-10 gap-2">
+					{ALPHABET.map((letter) => {
+						let btnClass = 'btn btn-sm';
+						const status = keyboardStatus[letter];
+						if (status === 'correct') btnClass += ' btn-success';
+						else if (status === 'present') btnClass += ' btn-warning';
+						else if (status === 'absent') btnClass += ' btn-neutral';
+						else btnClass += ' btn-outline';
+
+						return (
+							<button
+								key={letter}
+								className={btnClass}
+								onClick={() => handleKeyboardClick(letter)}>
+								{letter.toUpperCase()}
+							</button>
+						);
+					})}
+					<button
+						className="btn btn-sm btn-error col-span-2"
+						onClick={handleBackspace}>
+						Backspace
+					</button>
+				</div>
 
 				{/* Buttons */}
 				<div className="mb-4 flex gap-2">
@@ -114,6 +166,11 @@ const WordlePage: NextPage = () => {
 					</button>
 					<button className="btn btn-secondary" onClick={startNewGame}>
 						New Game
+					</button>
+					<button
+						className="btn btn-accent"
+						onClick={() => submitGuess(currentGuess)}>
+						Enter
 					</button>
 				</div>
 

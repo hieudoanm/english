@@ -12,7 +12,7 @@ self.__BUILD_MANIFEST = {
     "static/chunks/ca8bade30ce4e3d3.js"
   ],
   "/wordle": [
-    "static/chunks/cc8e430a4906c63f.js"
+    "static/chunks/3598bc81af9b01fd.js"
   ],
   "__rewrites": {
     "afterFiles": [],
