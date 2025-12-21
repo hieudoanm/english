@@ -9,14 +9,14 @@ export const Navbar: FC = () => {
 					Words
 				</Link>
 				<div className="flex items-center gap-4">
-					<Link href="/languages" className="btn btn-primary btn-sm">
-						Languages
-					</Link>
-					<Link href="/cards" className="btn btn-primary btn-sm">
+					<Link href="/cards" className="text-sm">
 						Cards
 					</Link>
-					<Link href="/dictionary" className="btn btn-primary btn-sm">
+					<Link href="/dictionary" className="text-sm">
 						Dictionary
+					</Link>
+					<Link href="/wordle" className="text-sm">
+						Wordle
 					</Link>
 				</div>
 			</div>

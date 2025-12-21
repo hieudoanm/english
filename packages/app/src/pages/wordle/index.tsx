@@ -1,3 +1,4 @@
+import { Navbar } from '@words/components/Navbar';
 import { NextPage } from 'next';
 import { useState } from 'react';
 
@@ -85,35 +86,40 @@ const WordlePage: NextPage = () => {
 	};
 
 	return (
-		<div className="bg-base-200 flex min-h-screen flex-col items-center justify-center px-4">
-			<h1 className="mb-6 text-4xl font-bold">Wordle Clone</h1>
+		<div className="bg-base-200 flex min-h-screen flex-col">
+			<Navbar />
+			<div className="flex grow flex-col items-center justify-center px-4">
+				<h1 className="mb-6 text-4xl font-bold">Wordle Clone</h1>
 
-			{/* Full Grid */}
-			{renderGrid()}
+				{/* Full Grid */}
+				{renderGrid()}
 
-			{/* Input */}
-			<input
-				type="text"
-				className="input input-bordered input-md mb-4 text-center uppercase"
-				maxLength={targetWord.length}
-				value={currentGuess}
-				onChange={(e) => setCurrentGuess(e.target.value.toLowerCase())}
-				onKeyDown={handleKey}
-				autoFocus
-			/>
+				{/* Input */}
+				<input
+					type="text"
+					className="input input-bordered input-md mb-4 text-center uppercase"
+					maxLength={targetWord.length}
+					value={currentGuess}
+					onChange={(e) => setCurrentGuess(e.target.value.toLowerCase())}
+					onKeyDown={handleKey}
+					autoFocus
+				/>
 
-			{/* Buttons */}
-			<div className="mb-4 flex gap-2">
-				<button className="btn btn-primary" onClick={() => setCurrentGuess('')}>
-					Clear
-				</button>
-				<button className="btn btn-secondary" onClick={startNewGame}>
-					New Game
-				</button>
+				{/* Buttons */}
+				<div className="mb-4 flex gap-2">
+					<button
+						className="btn btn-primary"
+						onClick={() => setCurrentGuess('')}>
+						Clear
+					</button>
+					<button className="btn btn-secondary" onClick={startNewGame}>
+						New Game
+					</button>
+				</div>
+
+				{/* Message */}
+				{message && <p className="mt-2 font-semibold">{message}</p>}
 			</div>
-
-			{/* Message */}
-			{message && <p className="mt-2 font-semibold">{message}</p>}
 		</div>
 	);
 };
