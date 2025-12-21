@@ -1,18 +1,21 @@
 self.__BUILD_MANIFEST = {
   "/": [
-    "static/chunks/86a5d57b8970e564.js"
+    "static/chunks/caa67c2f6eac9268.js"
   ],
   "/_error": [
-    "static/chunks/955012f025e92309.js"
+    "static/chunks/abea170164f309d9.js"
   ],
   "/cards": [
-    "static/chunks/eadcdf2e69e2ad15.js"
+    "static/chunks/e20d6d11ecb7fbb4.js"
   ],
   "/dictionary": [
-    "static/chunks/424579e99763a10d.js"
+    "static/chunks/4cd1419ed4a71cb5.js"
   ],
   "/languages": [
-    "static/chunks/b3d2a242ef84b56d.js"
+    "static/chunks/e52ba4a8b438c776.js"
+  ],
+  "/wordle": [
+    "static/chunks/14cf7ea25e35a066.js"
   ],
   "__rewrites": {
     "afterFiles": [],
@@ -25,6 +28,7 @@ self.__BUILD_MANIFEST = {
     "/_error",
     "/cards",
     "/dictionary",
-    "/languages"
+    "/languages",
+    "/wordle"
   ]
 };self.__BUILD_MANIFEST_CB && self.__BUILD_MANIFEST_CB()
