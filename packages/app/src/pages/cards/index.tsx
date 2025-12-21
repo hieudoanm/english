@@ -114,15 +114,15 @@ const FlashCardsPage = () => {
 						flipped ? 'rotate-y-180' : ''
 					}`}
 					onClick={flipCard}>
-					<div className="card-body preserve-3d relative h-full w-full">
+					<div className="card-body relative h-full w-full">
 						<div
-							className={`absolute inset-0 backface-hidden ${flipped ? 'z-10 hidden' : 'z-20'}`}>
+							className={`absolute inset-0 transition-opacity duration-500 backface-hidden ${flipped ? 'opacity-0' : 'opacity-100'}`}>
 							<p className="flex h-full items-center justify-center text-2xl font-semibold">
 								{currentCard.front}
 							</p>
 						</div>
 						<div
-							className={`absolute inset-0 backface-hidden ${flipped ? 'z-20' : 'z-10 hidden'}`}>
+							className={`absolute inset-0 transition-opacity duration-500 backface-hidden ${flipped ? 'opacity-100' : 'opacity-0'}`}>
 							<p className="flex h-full rotate-y-180 items-center justify-center text-2xl font-semibold">
 								{currentCard.back}
 							</p>
