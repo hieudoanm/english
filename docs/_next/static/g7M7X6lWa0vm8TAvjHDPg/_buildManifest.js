@@ -9,7 +9,7 @@ self.__BUILD_MANIFEST = {
     "static/chunks/f8c509f1c1d838a0.js"
   ],
   "/dictionary": [
-    "static/chunks/346a6ba41e658b59.js"
+    "static/chunks/870c0844e2875236.js"
   ],
   "/wordle": [
     "static/chunks/4873f3230d7bbe68.js"
