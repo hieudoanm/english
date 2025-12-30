@@ -25,7 +25,7 @@
 	},
 	"devDependencies": {
 		"@capacitor/cli": "8.0.0",
-		"@dotenvx/dotenvx": "1.51.2",
+		"@dotenvx/dotenvx": "1.51.4",
 		"@json2csv/plainjs": "7.0.6",
 		"@tailwindcss/postcss": "^4.1.18",
 		"@tauri-apps/cli": "2.9.6",
