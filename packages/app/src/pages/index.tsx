@@ -35,7 +35,9 @@ const LandingPage: NextPage = () => {
 						{/* Multi-language Support */}
 						<div className="card bg-base-100 p-6 shadow-lg transition hover:shadow-xl">
 							<div className="card-body">
-								<h3 className="card-title mb-2 text-2xl">Multi-language</h3>
+								<h3 className="card-title mb-2 text-center text-2xl">
+									Multi-language
+								</h3>
 								<p className="text-gray-600">
 									Expand your learning experience with support for multiple
 									languages beyond English and Korean.
@@ -46,7 +48,9 @@ const LandingPage: NextPage = () => {
 						{/* Flash Cards */}
 						<div className="card bg-base-100 p-6 shadow-lg transition hover:shadow-xl">
 							<div className="card-body">
-								<h3 className="card-title mb-2 text-2xl">Flash Cards</h3>
+								<h3 className="card-title mb-2 text-center text-2xl">
+									Flash Cards
+								</h3>
 								<p className="text-gray-600">
 									Learn vocabulary efficiently using interactive flash cards
 									with translations.
@@ -57,7 +61,9 @@ const LandingPage: NextPage = () => {
 						{/* English Dictionary */}
 						<div className="card bg-base-100 p-6 shadow-lg transition hover:shadow-xl">
 							<div className="card-body">
-								<h3 className="card-title mb-2 text-2xl">English Dictionary</h3>
+								<h3 className="card-title mb-2 text-center text-2xl">
+									English Dictionary
+								</h3>
 								<p className="text-gray-600">
 									Quickly search words with clear definitions, synonyms, and
 									antonyms to improve your English skills.

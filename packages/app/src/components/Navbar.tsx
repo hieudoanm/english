@@ -15,9 +15,6 @@ export const Navbar: FC = () => {
 					<Link href="/dictionary" className="text-sm">
 						Dictionary
 					</Link>
-					<Link href="/wordle" className="text-sm">
-						Wordle
-					</Link>
 				</div>
 			</div>
 		</div>
