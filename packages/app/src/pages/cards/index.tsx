@@ -13,7 +13,6 @@ const FlashCardsPage = () => {
 	const [currentIndex, setCurrentIndex] = useState(0);
 	const [flipped, setFlipped] = useState(false);
 	const [shuffledCards, setShuffledCards] = useState<FlashCard[]>([]);
-	const [isFlipping, setIsFlipping] = useState(false);
 
 	useEffect(() => {
 		// Wrap in a microtask to avoid cascading renders
