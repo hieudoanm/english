@@ -5,7 +5,7 @@ volumes:
 services:
   postgresql-words:
     restart: unless-stopped
-    image: postgres:18.1
+    image: postgres:18.2
     container_name: postgresql-words
     ports:
       - 5432:5432
