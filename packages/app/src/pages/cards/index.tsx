@@ -1,5 +1,5 @@
-import { Navbar } from '@words/components/Navbar';
-import words from '@words/data/words.json';
+import { Navbar } from '@english/components/Navbar';
+import words from '@english/data/words.json';
 import { useEffect, useState } from 'react';
 
 export type FlashCard = {

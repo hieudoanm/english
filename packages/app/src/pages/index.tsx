@@ -1,5 +1,5 @@
-import { Navbar } from '@words/components/Navbar';
-import languages from '@words/data/languages.json';
+import { Navbar } from '@english/components/Navbar';
+import languages from '@english/data/languages.json';
 import { NextPage } from 'next';
 import Link from 'next/link';
 

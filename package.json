@@ -1,17 +1,17 @@
 {
-  "name": "@words/app",
+  "name": "@english/app",
   "version": "0.0.1",
-  "description": "words",
+  "description": "english",
   "keywords": [
-    "words"
+    "english"
   ],
-  "homepage": "https://hieudoanm.github.io/words",
+  "homepage": "https://hieudoanm.github.io/english",
   "bugs": {
-    "url": "https://github.com/hieudoanm/words/issues"
+    "url": "https://github.com/hieudoanm/english/issues"
   },
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@github.com/hieudoanm/words.git"
+    "url": "git+ssh://git@github.com/hieudoanm/english.git"
   },
   "license": "GPL-3.0",
   "author": "hieudoanm <hieumdoan@gmail.com> (https://hieudoanm.github.io)",

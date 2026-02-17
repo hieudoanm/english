@@ -1,7 +1,7 @@
+import { Navbar } from '@english/components/Navbar';
+import { logger } from '@english/utils/log';
+import { tryCatch } from '@english/utils/try-catch';
 import { useQuery } from '@tanstack/react-query';
-import { Navbar } from '@words/components/Navbar';
-import { logger } from '@words/utils/log';
-import { tryCatch } from '@words/utils/try-catch';
 import { NextPage } from 'next';
 import { ChangeEvent, useState } from 'react';
 

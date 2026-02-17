@@ -1,4 +1,4 @@
-import { ErrorTemplate } from '@words/templates/ErrorTemplate';
+import { ErrorTemplate } from '@english/templates/ErrorTemplate';
 import { NextPage } from 'next';
 
 const messages = [

@@ -1,7 +1,7 @@
 import type { NextConfig } from 'next';
 
 const NODE_ENV = process.env.NODE_ENV ?? 'development';
-const BASE_PATH = 'words';
+const BASE_PATH = 'english';
 
 const nextConfig: NextConfig = {
 	/* config options here */
