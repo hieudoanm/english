@@ -3,15 +3,14 @@
 	"version": "0.0.1",
 	"private": true,
 	"scripts": {
-		"predev": "rimraf .next && kill-port 3000 && prisma generate",
+		"predev": "rimraf .next && kill-port 3000",
 		"dev": "next dev",
-		"prebuild": "rimraf .next ../../docs && prisma generate",
+		"prebuild": "rimraf .next ../../docs",
 		"build": "next build --turbopack",
 		"postbuild": "touch ../../docs/.nojekyll",
 		"prestart": "kill-port 3000",
 		"start": "next start",
-		"prelint": "prisma generate",
-		"format": "prettier --cache --write .",
+		"format": "prettier --cache --check --write .",
 		"lint": "eslint",
 		"test": "jest"
 	},

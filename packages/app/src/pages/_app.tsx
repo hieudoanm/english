@@ -21,7 +21,10 @@ const App: FC<AppProps> = ({ Component, pageProps }) => {
 	return (
 		<>
 			<Head>
-				<title>Words</title>
+				<title>English</title>
+				<link rel="icon" href="/favicon.ico" />
+				<link rel="manifest" href="/manifest.json" />
+				<meta name="viewport" content="initial-scale=1, viewport-fit=cover" />
 			</Head>
 			<div className={`${geistSans.className} ${geistMono.className}`}>
 				<QueryClientProvider client={queryClient}>
