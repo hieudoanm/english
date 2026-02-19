@@ -7,5 +7,5 @@ requires-python = "==3.14.3"
 dependencies = [
     "langchain==1.2.10",
     "langchain-community==0.4.1",
-    "langchain-core==1.2.13",
+    "langchain-core==1.2.14",
 ]
